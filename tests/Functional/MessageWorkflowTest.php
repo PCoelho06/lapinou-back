@@ -19,18 +19,15 @@ class MessageWorkflowTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        // Create a sample Message entity
         $message = (new Message())
             ->setEmail('user@example.com')
             ->setFirstName('Alice')
             ->setLastName('Johnson')
             ->setMessage('Test functional workflow.');
 
-        // Dispatch the MessageCreatedEvent
         $event = new MessageCreatedEvent($message);
         $this->dispatcher->dispatch($event);
 
-        // No exceptions mean the workflow worked as expected
         $this->assertTrue(true);
     }
 }
