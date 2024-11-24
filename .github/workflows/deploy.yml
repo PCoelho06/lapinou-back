@@ -40,4 +40,4 @@ jobs:
         if: success()
         env:
           GITHUB_REF: ${{ github.ref_name }}
-        run: ./deploy.sh "${GITHUB_REF}"
+        run: scripts/deploy.sh "${GITHUB_REF}"
