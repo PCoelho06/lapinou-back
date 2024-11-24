@@ -38,4 +38,6 @@ jobs:
 
       - name: Deploy to Hostinger
         if: success()
-        run: curl -X POST ${{ secrets.HOSTINGER_WEBHOOK_URL }}
+        run: curl -X POST ${{ secrets.HOSTINGER_WEBHOOK_URL }} \
+        -H "Content-Type: application/json" \
+        -d '{"branch": "main", "action": "deploy"}'
