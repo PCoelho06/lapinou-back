@@ -38,6 +38,6 @@ jobs:
 
       - name: Deploy to Hostinger
         if: success()
-        run: curl -X POST ${{ secrets.HOSTINGER_WEBHOOK_URL }} \
-        -H "Content-Type: application/json" \
-        -d '{"branch": "main", "action": "deploy"}'
+        env:
+          GITHUB_REF: ${{ github.ref_name }}
+        run: ./deploy.sh "${GITHUB_REF}"
