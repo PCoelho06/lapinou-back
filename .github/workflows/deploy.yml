@@ -16,13 +16,22 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: mbstring, intl, pdo_mysql
           ini-values: post_max_size=256M, upload_max_filesize=256M
           coverage: none
 
       - name: Install dependencies
         run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Prepare database
+        run: |
+          php bin/console doctrine:database:drop --force --env=test || true
+          php bin/console doctrine:database:create --env=test
+          php bin/console doctrine:schema:update --force --env=test
+
+      - name: Set permissions
+        run: chmod -R 777 var/
 
       - name: Run tests
         run: ./vendor/bin/phpunit
