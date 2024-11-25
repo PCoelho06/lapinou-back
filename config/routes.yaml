@@ -3,3 +3,7 @@ controllers:
     path: ../src/Controller/
     namespace: App\Controller
   type: attribute
+
+defaults:
+  _format: json
+trailing_slash_on_root: false
