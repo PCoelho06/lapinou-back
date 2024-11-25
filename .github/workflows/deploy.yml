@@ -50,4 +50,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          run: scripts/post-deploy.sh
+          script_path: scripts/post-deploy.sh
