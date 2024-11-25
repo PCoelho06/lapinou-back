@@ -41,3 +41,13 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref_name }}
         run: scripts/deploy.sh "${GITHUB_REF}"
+
+      - name: Post deployment
+        if: success()
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: scripts/post-deploy.sh
